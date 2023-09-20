@@ -1,6 +1,5 @@
 package stage04;
 
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class Step_1 {
