@@ -2,7 +2,7 @@ package stage11;
 
 import java.util.Scanner;
 
-public class Step_7 {
+public class Step_8 {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		int n1=scan.nextInt();
