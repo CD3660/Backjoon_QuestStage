@@ -3,7 +3,7 @@ package temp;
 import java.io.*;
 import java.util.*;
 
-public class Step_2 {
+public class Step_4 {
 	static int n;
 	static int m;
 	static int[] arr;
@@ -29,9 +29,9 @@ public class Step_2 {
 				}
 			}
 		} else {
-			for (int i = start; i < n - m + idx + 1; i++) {
+			for (int i = start; i < n; i++) {
 				arr[idx] = i + 1;
-				pick(idx + 1, i + 1);
+				pick(idx + 1, i);
 
 			}
 		}

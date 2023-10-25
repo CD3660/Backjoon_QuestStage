@@ -3,7 +3,7 @@ package temp;
 import java.io.*;
 import java.util.*;
 
-public class Step_2 {
+public class Step_3 {
 	static int n;
 	static int m;
 	static int[] arr;
@@ -14,12 +14,11 @@ public class Step_2 {
 		n = sc.nextInt();
 		m = sc.nextInt();
 		arr = new int[m];
-		pick(0, 0);
-
+		pick(0);
 		System.out.println(sb.toString());
 	}
 
-	public static void pick(int idx, int start) {
+	public static void pick(int idx) {
 		if (idx == m) {
 			for (int i = 0; i < m; i++) {
 				if (i != m - 1) {
@@ -29,9 +28,9 @@ public class Step_2 {
 				}
 			}
 		} else {
-			for (int i = start; i < n - m + idx + 1; i++) {
+			for (int i = 0; i < n ; i++) {
 				arr[idx] = i + 1;
-				pick(idx + 1, i + 1);
+				pick(idx + 1);
 
 			}
 		}
