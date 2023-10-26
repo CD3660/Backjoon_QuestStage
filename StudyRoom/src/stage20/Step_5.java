@@ -16,31 +16,31 @@ public class Step_5 {
 		for (int i = 0; i < n; i++) {
 			String temp = br.readLine();
 			if (temp.length() >= m) {
-				try {
-					map.put(temp, map.get(temp) + 1);
-				} catch (Exception e) {
-					map.put(temp, 1);
-				}
+
+				map.put(temp, map.getOrDefault(temp, 0) + 1);
+
 			}
 		}
 
-		List<Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
-		Collections.sort(list, new Comparator<Entry<String, Integer>>() {
-			public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
-				if (o1.getKey().length() == o2.getKey().length()&&o1.getValue() == o2.getValue()) {
-					return o1.getKey().compareTo(o2.getKey());
-				} 
-				if (o1.getValue() == o2.getValue()) {
-					return Integer.compare(o2.getKey().length(), o1.getKey().length());
-				} 
-				return Integer.compare(o2.getValue(), o1.getValue());
+		List<String> list = new ArrayList<>(map.keySet());
+		Collections.sort(list, new Comparator<String>() {
+			@Override
+			public int compare(String o1, String o2) {
+				if (Integer.compare(map.get(o1), map.get(o2)) != 0) {
+					return Integer.compare(map.get(o2), map.get(o1));
+				}
+				if (o1.length() != o2.length()) {
+					return Integer.compare(o2.length(), o1.length());
+				}
+				return o1.compareTo(o2);
 			}
 		});
-		
-		for (Entry<String, Integer> entry : list) {
-			bw.write(entry.getKey()+"\n");
+		StringBuilder sb = new StringBuilder();
+		for (String str : list) {
+			sb.append(str+"\n");
 		}
-		
+		bw.write(sb+"");
+
 		bw.flush();
 		bw.close();
 	}

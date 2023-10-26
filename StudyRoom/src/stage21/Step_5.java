@@ -4,40 +4,33 @@ import java.io.*;
 import java.util.*;
 
 public class Step_5 {
+	static StringBuilder cant = new StringBuilder();
+
 	public static void main(String[] args) throws IOException {
 		Scanner sc = new Scanner(System.in);
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
+		int length = (int) Math.pow(3, 12);
+		cantMaker(0, length - 1);
 		while (sc.hasNext()) {
-			int temp = sc.nextInt();
-			boolean[] cant = new boolean[(int) Math.pow(3, temp)];
-			cantMaker(cant, 0, cant.length-1);
-			sb = sb.delete(0, sb.length());
-			for (int j = 0; j < cant.length; j++) {
-				if (cant[j]) {
-					sb.append("-");
-				} else {
-					sb.append(" ");
-				}
-			}
-			System.out.println(sb.toString());
+			System.out.println(cant.subSequence(0, (int) Math.pow(3, sc.nextLong())));
 		}
 	}
 
-	public static void cantMaker(boolean[] cant, int left, int right) {
+	public static void cantMaker(int left, int right) {
+		int temp = (right - left + 1) / 3;
 		if (right - left > 3) {
-			cantMaker(cant, 0, cant.length / 3-1);
-			cantMaker(cant, cant.length / 3 * 2, cant.length-1);
-		} else if (right - left < 2) {
-			cant[0] = true;
+			cantMaker(left, left + temp - 1);
+			blackMaker(left+temp, left+temp*2-1);
+			cantMaker(left + temp * 2, right);
 		} else {
-			draw(cant, left, right);
+			draw();
 		}
 	}
-
-	public static void draw(boolean[] cant, int left, int right) {
-		cant[left] = true;
-		cant[right] = true;
+	public static void blackMaker(int left, int right) {
+		for(int i = left; i<=right; i++) {
+			cant.append(" ");
+		}
 	}
-
+	public static void draw() {
+		cant.append("- -");
+	}
 }
