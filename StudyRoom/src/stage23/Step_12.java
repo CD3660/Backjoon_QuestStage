@@ -4,29 +4,40 @@ import java.io.*;
 import java.util.*;
 
 public class Step_12 {
+	static int n;
+	static int[][] dp;
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int n = Integer.parseInt(br.readLine());
-		int[][] dp = new int[n][2];
+		n = Integer.parseInt(br.readLine());
+		dp = new int[n][2];
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < n; i++) {
 			dp[i][0] = Integer.parseInt(st.nextToken());
 		}
-		int temp = 0;
-		for (int i = n - 2; i >= 0; i--) {
-			temp = 0;
-			dp[i][1] = 1;
-			for (int j = i + 1; j < n; j++) {
-				if (dp[j][1] > 0) {
-					dp[i][1] += dp[j][1];
-					break;
-				} else if (dp[j][0] > temp) {
-					temp = dp[j][0];
-					dp[i][1]++;
+		dp[n-1][1] =1;
+		for(int i=n-2; i>=0; i--) {
+			lis(i);
+		}
+		int max = 0;
+		for(int i=0; i<n; i++) {
+			if(max<dp[i][1]) {
+				max = dp[i][1];
+			}
+		}
+		
+		System.out.println(max);
+	}
+
+	public static void lis(int idx) {
+		int temp = 1;
+		for (int i = idx; i < n; i++) {
+			if (dp[i][0] > dp[idx][0]) {
+				if(dp[i][1]+1>temp) {
+					temp = dp[i][1]+1;
 				}
 			}
 		}
-
-		System.out.println();
+		dp[idx][1] = temp;
 	}
 }
