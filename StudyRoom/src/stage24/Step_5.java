@@ -15,10 +15,10 @@ public class Step_5 {
 		for (int i = 1; i < n + 1; i++) {
 			st = new StringTokenizer(br.readLine());
 			for (int j = 1; j < n + 1; j++) {
-				if (j == 0) {
-					sum[i][j] = sum[i - 1][n] + Integer.parseInt(st.nextToken());
+				if (j == 1) {
+					sum[i][j] = sum[i - 1][n] + Long.parseLong(st.nextToken());
 				} else {
-					sum[i][j] = sum[i][j - 1] + Integer.parseInt(st.nextToken());
+					sum[i][j] = sum[i][j - 1] + Long.parseLong(st.nextToken());
 				}
 				box[i][j] = box[i - 1][j] + sum[i][j] - sum[i-1][n];
 			}
